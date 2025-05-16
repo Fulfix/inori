@@ -11,41 +11,47 @@ mod track_select_renderer;
 
 #[derive(Clone)]
 pub struct Theme {
+    pub block_active: Style,
+    pub field_album: Style,
+    pub field_artistsort: Style,
     pub item_highlight_active: Style,
     pub item_highlight_inactive: Style,
-    pub block_active: Style,
-    pub status_artist: Style,
-    pub status_album: Style,
-    pub status_title: Style,
-    pub artist_sort: Style,
-    pub album: Style,
-    pub playing: Style,
-    pub paused: Style,
-    pub stopped: Style,
-    pub slash_span: Style,
+    pub progress_bar_filled: Style,
+    pub progress_bar_unfilled: Style,
     pub search_query_active: Style,
     pub search_query_inactive: Style,
+    pub slash_span: Style,
+    pub status_album: Style,
+    pub status_artist: Style,
+    pub status_paused: Style,
+    pub status_playing: Style,
+    pub status_stopped: Style,
+    pub status_title: Style,
 }
 impl Theme {
-    pub fn new() -> Theme {
-    Theme {
-        item_highlight_active: Style::new().fg(Color::LightYellow).bg(Color::Black),  // LightMagenta foreground, Black background
-        item_highlight_inactive: Style::new().fg(Color::LightYellow).bg(Color::Black), // LightMagenta foreground, Black background
-        block_active: Style::new().fg(Color::LightYellow).bg(Color::Black),            // LightMagenta foreground, Black background
-        status_artist: Style::new().fg(Color::LightYellow).bg(Color::Black),           // LightMagenta foreground, Black background
-        status_album: Style::new().fg(Color::LightYellow).bg(Color::Black),            // LightMagenta foreground, Black background
-        status_title: Style::new().fg(Color::LightYellow).bg(Color::Black),            // LightMagenta foreground, Black background
-        artist_sort: Style::new().fg(Color::LightYellow).bg(Color::Black),             // LightMagenta foreground, Black background
-        album: Style::new().fg(Color::LightYellow).bg(Color::Black),                   // LightMagenta foreground, Black background
-        playing: Style::new().fg(Color::LightYellow).bg(Color::Black),                 // LightMagenta foreground, Black background
-        paused: Style::new().fg(Color::LightYellow).bg(Color::Black),                  // LightMagenta foreground, Black background
-        stopped: Style::new().fg(Color::LightYellow).bg(Color::Black),                 // LightMagenta foreground, Black background
-        slash_span: Style::new().fg(Color::LightYellow).bg(Color::Black),              // LightMagenta foreground, Black background
-        search_query_active: Style::new().fg(Color::LightYellow).bg(Color::Black),     // LightMagenta foreground, Black background
-        search_query_inactive: Style::new().fg(Color::LightYellow).bg(Color::Black),   // LightMagenta foreground, Black background
+    pub fn new() -> Self {
+        Self {
+            block_active: Style::default().fg(LightYellow),
+            field_album: Style::default().bold().italic().fg(LightYellow),
+            field_artistsort: Style::default().fg(LightYellow),
+            item_highlight_active: Style::default().fg(Black).bg(LightYellow),
+            item_highlight_inactive: Style::default().fg(Black).bg(LightYellow),
+            progress_bar_filled: Style::default()
+                .fg(LightYellow)
+                .bg(Black)
+                .add_modifier(Modifier::BOLD),
+            progress_bar_unfilled: Style::default().fg(Black),
+            search_query_active: Style::default().bg(LightYellow).fg(Black),
+            search_query_inactive: Style::default().bg(LightYellow).fg(Black),
+            slash_span: Style::default().fg(LightYellow),
+            status_album: Style::default().bold().italic().fg(LightYellow),
+            status_artist: Style::default().fg(LightYellow),
+            status_paused: Style::default().fg(LightYellow),
+            status_playing: Style::default().fg(LightYellow),
+            status_stopped: Style::default().fg(LightYellow),
+            status_title: Style::default().bold(),
+        }
     }
-}
-
 }
 
 pub fn view(model: &mut Model, frame: &mut Frame) {
